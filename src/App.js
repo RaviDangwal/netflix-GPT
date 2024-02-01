@@ -2,9 +2,8 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello. I will build netflix</h1>
-      <h2>Netflix-GPT loading....soon</h2>
+    <div className="text-3xl font-bold text-green-700">
+      Hello. I will build netflix Netflix-GPT loading....soon
     </div>
   );
 }
