@@ -18,6 +18,14 @@
 - BugFix: if the user logged in it will redirect to browse page wheather we wrtie login page url
 - unsubscribed to onAuthStateChanged callback
 - add Hardcoded values to single Constant.js
+- Registered to TMDB account
+- Get data from TMDB now Playing movies
+- custom Hook for now playing movies
+- update store
+- Fetch data for trailer video
+- update store with trailer video data
+- embbedded the youtube video and make it autoplay
+- added tailwind css to more elements
 
 # Features
 
