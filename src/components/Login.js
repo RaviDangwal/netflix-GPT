@@ -7,25 +7,24 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/store/userSlice";
+import { AVATAR_URL } from "../utils/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
+  const dispatch = useDispatch();
 
   const handleButtonClick = () => {
     //validate the from data
 
-    const message = checkValidData(
-      email.current.value,
-      password.current.value,
-      name.current.value
-    );
+    const message = checkValidData(email.current.value, password.current.value);
     console.log(message);
     setErrorMessage(message);
 
@@ -41,19 +40,26 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          updateProfile(auth.currentUser, {
-            displayName: "name.current.value",
-            photoURL: "https://avatars.githubusercontent.com/u/141614366?v=4",
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: AVATAR_URL,
           })
             .then(() => {
               // Profile updated!
-              navigate("/browse");
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
             })
             .catch((error) => {
               // An error occurred
               setErrorMessage(error.message);
             });
-          console.log(user);
 
           // ...
         })
@@ -73,10 +79,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-
           console.log(user);
-          navigate("/browse");
-
           // ...
         })
         .catch((error) => {

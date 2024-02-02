@@ -12,6 +12,12 @@
 - Create signUp user account in firebase
 - Implement Sign in user Api
 - Created our redux store amd also userSLice
+- implemented sign out
+- update profile through api
+- update Profile
+- BugFix: if the user logged in it will redirect to browse page wheather we wrtie login page url
+- unsubscribed to onAuthStateChanged callback
+- add Hardcoded values to single Constant.js
 
 # Features
 
